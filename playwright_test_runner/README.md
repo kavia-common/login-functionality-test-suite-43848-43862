@@ -27,6 +27,20 @@ Launches the test runner in interactive watch mode.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+## Playwright E2E Tests (Login)
+
+This repository also includes a Playwright E2E suite that validates login functionality against:
+https://the-internet.herokuapp.com/login
+
+Common commands:
+
+- `npm run e2e` – run all Playwright tests
+- `npm run e2e:ui` – run with Playwright UI runner
+- `npm run e2e:report` – open the HTML report
+- `npm run e2e:install` – install Playwright browsers (required once per environment)
+
+See `PLAYWRIGHT_E2E_README.md` for full details.
+
 ## Customization
 
 ### Colors
