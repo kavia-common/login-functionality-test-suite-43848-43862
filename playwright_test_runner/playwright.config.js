@@ -11,7 +11,10 @@ const baseURL =
 
 module.exports = defineConfig({
   testDir: path.join(__dirname, "playwright", "tests"),
+
+  // Where Playwright stores test output artifacts (screenshots, traces, videos, etc.)
   outputDir: path.join(__dirname, "playwright", "test-results"),
+
   timeout: 30_000,
   expect: {
     timeout: 5_000,
@@ -23,14 +26,35 @@ module.exports = defineConfig({
   workers: process.env.CI ? 2 : undefined,
 
   reporter: [
+    // Console output (shows per-test status and timing in the terminal)
     ["list"],
-    ["html", { outputFolder: path.join(__dirname, "playwright", "html-report"), open: "never" }],
+
+    /**
+     * HTML report (requested):
+     * - Summary (total/passed/failed), timing, project/browser info are included by Playwright.
+     * - Step details are shown where supported, and are richer when traces are available.
+     */
+    [
+      "html",
+      {
+        // Save report in a top-level folder named exactly "playwright-report"
+        outputFolder: path.join(__dirname, "playwright-report"),
+        open: "never",
+      },
+    ],
+
+    // JUnit for CI systems that ingest XML reports
     ["junit", { outputFile: path.join(__dirname, "playwright", "junit.xml") }],
   ],
 
   use: {
     baseURL,
-    // Capture artifacts to help debug failures
+
+    /**
+     * Artifacts that enrich the HTML report:
+     * - Traces provide action-by-action details and timings ("steps") when supported.
+     * - Screenshots/videos help contextualize failures.
+     */
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
