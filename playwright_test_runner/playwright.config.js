@@ -39,7 +39,8 @@ module.exports = defineConfig({
       {
         // Save report in a top-level folder named exactly "playwright-report"
         outputFolder: path.join(__dirname, "playwright-report"),
-        open: "never",
+        // Auto-open report on local runs; stay non-interactive in CI
+        open: process.env.CI ? "never" : "on-failure",
       },
     ],
 
