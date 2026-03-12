@@ -17,6 +17,8 @@
     "e2e:ui": "playwright test --ui",
     "e2e:report": "playwright show-report",
     "e2e:codegen": "node ./playwright/scripts/codegen.js",
+    "e2e:zip-report": "node ./playwright/scripts/zip-report.js",
+    "e2e:full-report": "playwright test && node ./playwright/scripts/zip-report.js",
     "e2e:install": "playwright install --with-deps",
     "ci:install": "rm -r node_modules/.cache 2>/dev/null; npm ci"
   },
@@ -39,6 +41,7 @@
     "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
+    "archiver": "^7.0.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.6.1"
   }
